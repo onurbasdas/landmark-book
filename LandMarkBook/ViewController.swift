@@ -11,6 +11,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var landmarkNames = [String]()
     var landmarkImages = [UIImage]()
+    var chosenLandmarkName = ""
+    var chosenLandmarkImage = UIImage()
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -37,6 +39,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         landmarkImages.append(UIImage(named: "stonehenge")!)
         landmarkImages.append(UIImage(named: "tacmahal")!)
         
+        navigationItem.title = "Landmark Book"
+        
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -60,9 +64,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        chosenLandmarkName = landmarkNames[indexPath.row]
+        chosenLandmarkImage = landmarkImages[indexPath.row]
+        
         performSegue(withIdentifier: "toImageViewController", sender: nil)
     }
-    
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toImageViewController"{
+            let destinationVC = segue.destination as! imageViewController
+            destinationVC.selectedLandmarkName = chosenLandmarkName
+            destinationVC.selectedLandmarkImage = chosenLandmarkImage
+        }
+    }
 }
 
