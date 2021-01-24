@@ -11,18 +11,21 @@ class imageViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var landmarkLabel: UILabel!
+    @IBOutlet weak var textView: UITextView!
     
     var selectedLandmarkName = ""
     var selectedLandmarkImage = UIImage()
+    var selectedLandmarkText = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         landmarkLabel.text = selectedLandmarkName
         imageView.image = selectedLandmarkImage
+        textView.text = selectedLandmarkText
         
     }
     
-
-
+    
+    
 }
